@@ -1,0 +1,11 @@
+**/.ipynb_checkpoints
+*.fits
+*.nf2
+*.vtk
+*.npy
+*.png
+**/database
+**/.DS_Store
+**/__pycache__
+*.nc
+**/*_TAI/

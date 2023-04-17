@@ -1,0 +1,31 @@
+{
+    "gpu_id": "3",
+    "base_path": "runs_series/NOAA12673",
+    "data_path": "data/SHARP/NOAA12673",
+    "meta_path": "runs_scratch/NOAA12673/dim256_bin2_pfTrue_ld0.1_lf0.1/20170904_000000_TAI/final.pt",
+
+    "d_slice": null,
+    "bin": 2,
+
+    "height": 160,
+    "spatial_norm": 160,
+    "b_norm": 2500,
+
+    "meta_info": null,
+    "dim": 256,
+    "positional_encoding": false,
+    "use_potential_boundary": true,
+    "potential_strides": 4,
+    "use_vector_potential":  false,
+    "lambda_div": 1e-1,
+    "lambda_ff": 1e-1,
+    "decay_iterations": null,
+    "device": null,
+    "work_directory": null,
+
+    "total_iterations": 2000,
+    "batch_size": 10000,
+    "log_interval": 2000,
+    "validation_interval": -1,
+    "num_workers": 4
+}
