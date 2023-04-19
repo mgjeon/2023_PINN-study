@@ -2,3 +2,4 @@
 *.fits
 *series/
 *nc
+**/.DS_Store
