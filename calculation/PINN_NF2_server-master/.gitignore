@@ -1,8 +1,0 @@
-**/__pycache__/
-**/.vscode/
-**/My_results/
-
-data/
-!nf2/data/
-
-**/runs*/
