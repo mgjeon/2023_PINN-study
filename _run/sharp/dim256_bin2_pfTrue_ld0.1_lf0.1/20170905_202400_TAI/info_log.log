@@ -1,0 +1,52 @@
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
+[Iteration 010000/100000] [B-Field: 0.00444010; Div: 0.44647691; For: 0.84195137] [0:23:35.927706]
+Lambda B: 251.188643
+LR: 0.000397
+Validation [Cube: B: 52.115; Div: 0.033; For: 1.237; Sig: 42.967]
+[Iteration 020000/100000] [B-Field: 0.00081792; Div: 0.07269111; For: 0.14336108] [0:48:44.766558]
+Lambda B: 63.095734
+LR: 0.000315
+Validation [Cube: B: 40.657; Div: 0.022; For: 0.933; Sig: 33.141]
+[Iteration 030000/100000] [B-Field: 0.00063258; Div: 0.02854662; For: 0.04611592] [1:12:35.605444]
+Lambda B: 15.848932
+LR: 0.000251
+Validation [Cube: B: 41.055; Div: 0.016; For: 0.725; Sig: 25.627]
+[Iteration 040000/100000] [B-Field: 0.00071631; Div: 0.01062175; For: 0.01772633] [1:37:52.753728]
+Lambda B: 3.981072
+LR: 0.000199
+Validation [Cube: B: 46.972; Div: 0.008; For: 0.509; Sig: 17.640]
+[Iteration 050000/100000] [B-Field: 0.00093656; Div: 0.00375693; For: 0.00662862] [2:03:34.877158]
+Lambda B: 1.000000
+LR: 0.000158
+Validation [Cube: B: 55.269; Div: 0.004; For: 0.337; Sig: 11.631]
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
+Resuming training from iteration 50000
+[Iteration 060000/050000] [B-Field: 0.00109071; Div: 0.00180827; For: 0.00326294] [0:25:19.963132]
+Lambda B: 0.999862
+LR: 0.000126
+Validation [Cube: B: 55.695; Div: 0.003; For: 0.308; Sig: 10.261]
+[Iteration 070000/050000] [B-Field: 0.00106963; Div: 0.00138993; For: 0.00269858] [0:51:15.191303]
+Lambda B: 0.999862
+LR: 0.000100
+Validation [Cube: B: 55.228; Div: 0.003; For: 0.288; Sig: 9.223]
+[Iteration 080000/050000] [B-Field: 0.00104773; Div: 0.00114975; For: 0.00238079] [1:17:04.158669]
+Lambda B: 0.999862
+LR: 0.000079
+Validation [Cube: B: 54.947; Div: 0.003; For: 0.283; Sig: 8.872]
+[Iteration 090000/050000] [B-Field: 0.00103023; Div: 0.00098875; For: 0.00216434] [1:42:35.337480]
+Lambda B: 0.999862
+LR: 0.000063
+Validation [Cube: B: 54.645; Div: 0.003; For: 0.278; Sig: 8.571]
+[Iteration 100000/050000] [B-Field: 0.00101605; Div: 0.00087166; For: 0.00200946] [2:06:59.746740]
+Lambda B: 0.999862
+LR: 0.000050
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
+Resuming training from iteration 100000
+Training already finished!
+TOTAL RUNTIME: 0:00:02.426165
