@@ -6,3 +6,5 @@
 _repo/
 _data/
 dataset*
+_run/
+**/__pycache__/
