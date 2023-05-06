@@ -1,10 +1,9 @@
+**/.DS_Store
+**/__pycache__/
+_repo/
+_data/
+_run/
 *.vtk
 *.fits
 *series/
 *nc
-**/.DS_Store
-_repo/
-_data/
-dataset*
-_run/
-**/__pycache__/
