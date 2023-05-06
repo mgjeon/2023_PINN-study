@@ -2,7 +2,6 @@
 **/__pycache__/
 _repo/
 _data/
-_run/
 *.vtk
 *.fits
 *series/
