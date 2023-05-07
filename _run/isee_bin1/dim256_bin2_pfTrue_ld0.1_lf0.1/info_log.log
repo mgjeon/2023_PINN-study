@@ -1,0 +1,44 @@
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA RTX A6000']
+[Iteration 010000/100000] [B-Field: 0.00675419; Div: 0.68453223; For: 1.54107594] [0:12:02.520373]
+Lambda B: 251.188643
+LR: 0.000397
+Validation [Cube: B: 108.054; Div: 0.020; For: 1.155; Sig: 42.185]
+[Iteration 020000/100000] [B-Field: 0.00261474; Div: 0.15308914; For: 0.29002914] [0:24:46.698321]
+Lambda B: 63.095734
+LR: 0.000315
+Validation [Cube: B: 96.751; Div: 0.018; For: 0.814; Sig: 30.170]
+[Iteration 030000/100000] [B-Field: 0.00234734; Div: 0.05440380; For: 0.09662944] [0:37:26.059815]
+Lambda B: 15.848932
+LR: 0.000251
+Validation [Cube: B: 98.090; Div: 0.011; For: 0.615; Sig: 22.425]
+[Iteration 040000/100000] [B-Field: 0.00251936; Div: 0.01786146; For: 0.03432966] [0:50:06.065131]
+Lambda B: 3.981072
+LR: 0.000199
+Validation [Cube: B: 104.171; Div: 0.006; For: 0.418; Sig: 14.811]
+[Iteration 050000/100000] [B-Field: 0.00294323; Div: 0.00567813; For: 0.01143078] [1:02:46.758709]
+Lambda B: 1.000000
+LR: 0.000158
+Validation [Cube: B: 112.731; Div: 0.003; For: 0.242; Sig: 8.621]
+[Iteration 060000/100000] [B-Field: 0.00321514; Div: 0.00261534; For: 0.00524539] [1:15:26.231492]
+Lambda B: 0.999862
+LR: 0.000126
+Validation [Cube: B: 113.106; Div: 0.002; For: 0.228; Sig: 7.829]
+[Iteration 070000/100000] [B-Field: 0.00317754; Div: 0.00198671; For: 0.00427167] [1:28:06.824169]
+Lambda B: 0.999862
+LR: 0.000100
+Validation [Cube: B: 112.407; Div: 0.002; For: 0.207; Sig: 6.866]
+[Iteration 080000/100000] [B-Field: 0.00313622; Div: 0.00161220; For: 0.00372226] [1:40:47.773374]
+Lambda B: 0.999862
+LR: 0.000079
+Validation [Cube: B: 112.040; Div: 0.002; For: 0.198; Sig: 6.398]
+[Iteration 090000/100000] [B-Field: 0.00310347; Div: 0.00135572; For: 0.00335349] [1:53:28.044127]
+Lambda B: 0.999862
+LR: 0.000063
+Validation [Cube: B: 111.808; Div: 0.002; For: 0.198; Sig: 6.229]
+[Iteration 100000/100000] [B-Field: 0.00307788; Div: 0.00117471; For: 0.00309130] [2:06:07.287922]
+Lambda B: 0.999862
+LR: 0.000050
+Validation [Cube: B: 111.403; Div: 0.002; For: 0.193; Sig: 5.955]
+TOTAL RUNTIME: 2:06:56.100412
