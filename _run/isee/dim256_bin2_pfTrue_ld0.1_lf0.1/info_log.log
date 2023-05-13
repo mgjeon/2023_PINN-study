@@ -1,0 +1,56 @@
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA RTX A6000']
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA RTX A6000']
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 2) ['NVIDIA RTX A6000', 'NVIDIA RTX A6000']
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA RTX A6000']
+[Iteration 010000/100000] [B-Field: 0.00541959; Div: 0.60872155; For: 1.25589156] [0:12:02.241917]
+Lambda B: 251.188643
+LR: 0.000397
+Configuration:
+dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
+Using device: cuda (gpus 1) ['NVIDIA RTX A6000']
+Resuming training from iteration 10000
+[Iteration 020000/090000] [B-Field: 0.00156726; Div: 0.10915364; For: 0.21343032] [0:12:13.282472]
+Lambda B: 63.095734
+LR: 0.000315
+Validation [Cube: B: 76.222; Div: 0.027; For: 0.990; Sig: 33.485]
+[Iteration 030000/090000] [B-Field: 0.00132608; Div: 0.04380766; For: 0.07294428] [0:24:38.051240]
+Lambda B: 15.848932
+LR: 0.000251
+Validation [Cube: B: 76.275; Div: 0.024; For: 0.746; Sig: 26.206]
+[Iteration 040000/090000] [B-Field: 0.00145955; Div: 0.01649218; For: 0.02860642] [0:37:02.365094]
+Lambda B: 3.981072
+LR: 0.000199
+Validation [Cube: B: 82.744; Div: 0.012; For: 0.535; Sig: 19.379]
+[Iteration 050000/090000] [B-Field: 0.00181940; Div: 0.00585825; For: 0.01066162] [0:49:26.570712]
+Lambda B: 1.000000
+LR: 0.000158
+Validation [Cube: B: 92.835; Div: 0.007; For: 0.333; Sig: 12.362]
+[Iteration 060000/090000] [B-Field: 0.00206373; Div: 0.00273417; For: 0.00511791] [1:01:50.276686]
+Lambda B: 0.999862
+LR: 0.000126
+Validation [Cube: B: 92.915; Div: 0.006; For: 0.317; Sig: 11.308]
+[Iteration 070000/090000] [B-Field: 0.00202630; Div: 0.00206241; For: 0.00419873] [1:14:14.578989]
+Lambda B: 0.999862
+LR: 0.000100
+Validation [Cube: B: 92.362; Div: 0.005; For: 0.297; Sig: 10.175]
+[Iteration 080000/090000] [B-Field: 0.00198582; Div: 0.00167848; For: 0.00368032] [1:26:39.068078]
+Lambda B: 0.999862
+LR: 0.000079
+Validation [Cube: B: 91.868; Div: 0.005; For: 0.288; Sig: 9.585]
+[Iteration 090000/090000] [B-Field: 0.00195141; Div: 0.00139829; For: 0.00330154] [1:39:03.319213]
+Lambda B: 0.999862
+LR: 0.000063
+Validation [Cube: B: 91.488; Div: 0.005; For: 0.282; Sig: 9.126]
+[Iteration 100000/090000] [B-Field: 0.00192924; Div: 0.00121663; For: 0.00305406] [1:51:27.467024]
+Lambda B: 0.999862
+LR: 0.000050
+Validation [Cube: B: 91.104; Div: 0.004; For: 0.282; Sig: 8.953]
+TOTAL RUNTIME: 1:51:42.142336
