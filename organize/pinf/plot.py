@@ -3,7 +3,7 @@ import pyvista as pv
 import os
 import numpy as np
 
-def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), title='LL', overwrite=False):
+def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), title='LL', overwrite=False, imgpath='./img.png', az=100, el=10):
 
     if not os.path.exists(vtk_path) or overwrite:
         dim = B.shape[:-1]
@@ -103,7 +103,7 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
         )
         p.add_mesh(stream.tube(radius=0.2), 
                 cmap='plasma', **dargs_J)
-        p.add_mesh(src, point_size=10)
+        p.add_mesh(src, point_size=10, color='red')
 
     xrange = points[0]
     yrange = points[1]
@@ -140,4 +140,12 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
     # p.camera.zoom(1.0)
     p.show_bounds()
     p.add_title(title)
-    p.show(jupyter_backend='static')
+    # p.show(jupyter_backend='static')
+    p.save_graphic(imgpath)
+
+    # azel_path = os.path.join(os.path.dirname(imgpath), os.path.basename(imgpath).split('.')[0] + '_' + f'{az}_{el}' + '.' + os.path.basename(imgpath).split('.')[1])
+    # p.camera.azimuth = az
+    # p.camera.elevation = el
+    # p.save_graphic(azel_path)
+
+    # p.screenshot(imgpath)

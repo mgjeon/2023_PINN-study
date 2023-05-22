@@ -242,7 +242,7 @@ class NF2Trainer:
                     'cube_shape': self.cube_shape,
                     'b_norm': self.b_norm,
                     'spatial_norm': self.spatial_norm,
-                    'meta_info': self.meta_info}, os.path.join(self.base_path, f'fields_{iter}.nf2'))
+                    'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % (iter+1)))
                 torch.save({'iteration': iter + 1,
                     'm': self.model.state_dict(),
                     'o': self.opt.state_dict(),
