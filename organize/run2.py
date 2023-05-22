@@ -5,10 +5,11 @@ from datetime import datetime
 
 from pinf.analytical_field import get_analytic_b_field
 from pinf.trainer import NF2Trainer
-from pinf.unpack import load_cube
+
+b = get_analytic_b_field(n=1, m=1, l=0.3, psi=np.pi/2, resolution=64, bounds=[-1, 1, -1, 1, 0, 2])
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]= "0"
+os.environ["CUDA_VISIBLE_DEVICES"]= "0,1"
 
 base_path = './run2'
 meta_path = None
@@ -35,7 +36,7 @@ total_iterations = 50000
 batch_size = 10000
 log_interval = 100
 validation_interval = 100
-num_workers = 4
+num_workers = 8
 
 # init logging
 os.makedirs(base_path, exist_ok=True)
