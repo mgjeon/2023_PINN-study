@@ -191,6 +191,7 @@ class NF2Trainer:
                     'b_norm': self.b_norm,
                     'spatial_norm': self.spatial_norm,
                     'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % iter))
+                self.plot_sample(iter-1, batch_size=batch_size)
                 model.train()
 
             # compute boundary loss
