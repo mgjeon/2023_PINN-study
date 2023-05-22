@@ -184,6 +184,15 @@ class NF2Trainer:
             # forward step
             b = model(coords)
 
+            if iter == 0:
+                model.eval()
+                torch.save({'model': self.model,
+                    'cube_shape': self.cube_shape,
+                    'b_norm': self.b_norm,
+                    'spatial_norm': self.spatial_norm,
+                    'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % iter))
+                model.train()
+
             # compute boundary loss
             boundary_b = b[:n_boundary_coords]
             b_diff = torch.abs(boundary_b - b_true)
@@ -212,8 +221,9 @@ class NF2Trainer:
                 self.lambda_B *= self.lambda_B_decay
             if scheduler.get_last_lr()[0] > 5e-5:
                 scheduler.step()
+
             # logging
-            if log_interval > 0 and (iter + 1) % log_interval == 0:
+            if (log_interval > 0 and (iter + 1) % log_interval == 0) or (iter == 0):
                 # log loss
                 logging.info('[Iteration %06d/%06d] [BC: %.08f; Div: %.08f; For: %.08f] [%s]' %
                              (iter + 1, iterations,
@@ -235,9 +245,8 @@ class NF2Trainer:
                 logging.info('Lambda B: %f' % (self.lambda_B))
                 logging.info('LR: %f' % (scheduler.get_last_lr()[0]))
             # validation
-            if validation_interval > 0 and (iter + 1) % validation_interval == 0:
+            if (validation_interval > 0 and (iter + 1) % validation_interval == 0) or (iter == 0):
                 model.eval()
-                self.save(iter)
                 torch.save({'model': self.model,
                     'cube_shape': self.cube_shape,
                     'b_norm': self.b_norm,
