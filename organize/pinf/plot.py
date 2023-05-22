@@ -3,7 +3,7 @@ import pyvista as pv
 import os
 import numpy as np
 
-def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), title='LL', overwrite=False, imgpath='./img.png', az=100, el=10):
+def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), title='LL', overwrite=False):
 
     if not os.path.exists(vtk_path) or overwrite:
         dim = B.shape[:-1]
@@ -21,24 +21,24 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
     xindmax, yindmax, zindmax = mesh.dimensions
     xcenter, ycenter, zcenter = mesh.center
 
-    mesh_g = mesh.compute_derivative(scalars='B')
+    # mesh_g = mesh.compute_derivative(scalars='B')
 
-    def gradients_to_dict(arr):
-        keys = np.array(
-            ["dBx/dx", "dBx/dy", "dBx/dz", "dBy/dx", "dBy/dy", "dBy/dz", "dBz/dx", "dBz/dy", "dBz/dz"]
-        )
-        keys = keys.reshape((3,3))[:, : arr.shape[1]].ravel()
-        return dict(zip(keys, mesh_g['gradient'].T))
+    # def gradients_to_dict(arr):
+    #     keys = np.array(
+    #         ["dBx/dx", "dBx/dy", "dBx/dz", "dBy/dx", "dBy/dy", "dBy/dz", "dBz/dx", "dBz/dy", "dBz/dz"]
+    #     )
+    #     keys = keys.reshape((3,3))[:, : arr.shape[1]].ravel()
+    #     return dict(zip(keys, mesh_g['gradient'].T))
 
-    gradients = gradients_to_dict(mesh_g['gradient'])
+    # gradients = gradients_to_dict(mesh_g['gradient'])
 
-    curlB_x = gradients['dBz/dy'] - gradients['dBy/dz']
-    curlB_y = gradients['dBx/dz'] - gradients['dBz/dx']
-    curlB_z = gradients['dBy/dx'] - gradients['dBx/dy']
+    # curlB_x = gradients['dBz/dy'] - gradients['dBy/dz']
+    # curlB_y = gradients['dBx/dz'] - gradients['dBz/dx']
+    # curlB_z = gradients['dBy/dx'] - gradients['dBx/dy']
 
-    curlB = np.vstack([curlB_x, curlB_y, curlB_z]).T
+    # curlB = np.vstack([curlB_x, curlB_y, curlB_z]).T
 
-    mesh.point_data['curlB'] = curlB
+    # mesh.point_data['curlB'] = curlB
 
     p = pv.Plotter()
     p.add_mesh(mesh.outline())
@@ -58,7 +58,7 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
         component=2, 
         clim=(-100, 100), 
         scalar_bar_args=sargs_B, 
-        show_scalar_bar=True, 
+        show_scalar_bar=False, 
         lighting=False
     )
     p.add_mesh(mesh.extract_subset((0, xindmax, 0, yindmax, 0, 0)), 
@@ -66,22 +66,22 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
     #-----------------------
 
     #-----------------------
-    sargs_J = dict(
-        title='J = curl(B)',
-        title_font_size=15,
-        height=0.25,
-        width=0.05,
-        vertical=True,
-        position_x = 0.9,
-        position_y = 0.05,
-    )
-    dargs_J = dict(
-        scalars='curlB', 
-        clim=(0, 20),
-        scalar_bar_args=sargs_J, 
-        show_scalar_bar=True, 
-        lighting=False
-    )
+    # sargs_J = dict(
+    #     title='J = curl(B)',
+    #     title_font_size=15,
+    #     height=0.25,
+    #     width=0.05,
+    #     vertical=True,
+    #     position_x = 0.9,
+    #     position_y = 0.05,
+    # )
+    # dargs_J = dict(
+    #     scalars='curlB', 
+    #     clim=(0, 20),
+    #     scalar_bar_args=sargs_J, 
+    #     show_scalar_bar=True, 
+    #     lighting=False
+    # )
     #-----------------------
 
     def draw_streamlines(pts):
@@ -101,9 +101,11 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
             # terminal_speed = 1e-16,
             # max_error = 1e-6,
         )
-        p.add_mesh(stream.tube(radius=0.2), 
-                cmap='plasma', **dargs_J)
-        p.add_mesh(src, point_size=10, color='red')
+        # p.add_mesh(stream.tube(radius=0.2), 
+        #         cmap='plasma', **dargs_J)
+        
+        p.add_mesh(stream.tube(radius=0.2), lighting=False)
+        p.add_mesh(src, point_size=5, color='red')
 
     xrange = points[0]
     yrange = points[1]
@@ -134,12 +136,17 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), tit
     # p.add_mesh(stream.tube(radius=0.2), 
     #         cmap='plasma', **dargs_J)
 
-    p.camera_position = 'xy'           
+    p.camera_position = 'xy'
+    p.show_bounds()
+    p.add_title(title)
+
+    return p
+
+              
     # p.camera.azimuth = -100
     # p.camera.elevation = -20
     # p.camera.zoom(1.0)
-    p.show_bounds()
-    p.add_title(title)
+    
     # p.show(jupyter_backend='static')
     p.save_graphic(imgpath)
 

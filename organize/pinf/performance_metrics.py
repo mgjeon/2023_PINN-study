@@ -1,9 +1,9 @@
 import numpy as np 
+import pandas as pd
 
-from pinf.potential_field import get_potential
 from pinf.metric import vector_norm, curl, divergence
 
-def metrics(B, b, base_path='./evaluation.txt'):
+def metrics(B, b, B_potential, b_potential):
     """
     B is the numerical solution
     b is the reference magnetic field
@@ -20,10 +20,10 @@ def metrics(B, b, base_path='./evaluation.txt'):
 
     eps = (vector_norm(B) ** 2).sum() / (vector_norm(b) ** 2).sum()
 
-    B_potential = get_potential(B[:, :, 0, 2], B.shape[-1])
+    # B_potential = get_potential(B[:, :, 0, 2], B.shape[-1])
     eps_p = (vector_norm(B) ** 2).sum() / (vector_norm(B_potential) ** 2).sum()
 
-    b_potential = get_potential(b[:, :, 0, 2], b.shape[-1])
+    # b_potential = get_potential(b[:, :, 0, 2], b.shape[-1])
     eps_p_b = (vector_norm(b) ** 2).sum() / (vector_norm(b_potential) ** 2).sum()
 
     j = curl(B)
@@ -36,18 +36,20 @@ def metrics(B, b, base_path='./evaluation.txt'):
     L1_b = (vector_norm(np.cross(j_b, b, -1)) ** 2 / vector_norm(b) ** 2).mean()
     L2_b = (divergence(b) ** 2).mean()
 
-    with open(base_path, 'w') as f:
-        print('c_vec', c_vec, file=f)
-        print('c_cs', c_cs, file=f)
-        print('1 - E_n', 1 - E_n, file=f)
-        print('1 - E_m', 1 - E_m, file=f)
-        print('eps', eps, file=f)
-        print('--------------', file=f)
-        print('eps_p', eps_p, file=f)
-        print('sig_J', sig_J, file=f)
-        print('L1', L1, file=f)
-        print('L2', L2, file=f)
-        print('eps_p_b', eps_p_b, file=f)
-        print('sig_J_b', sig_J_b, file=f)
-        print('L1_b', L1_b, file=f)
-        print('L2_b', L2_b, file=f)
+    return c_vec, c_cs, E_n, E_m, eps, eps_p, sig_J, L1, L2, eps_p_b, sig_J_b, L1_b, L2_b
+
+    # with open(metric_path, 'w') as f:
+    #     print('c_vec', c_vec, file=f)
+    #     print('c_cs', c_cs, file=f)
+    #     print('1 - E_n', 1 - E_n, file=f)
+    #     print('1 - E_m', 1 - E_m, file=f)
+    #     print('eps', eps, file=f)
+    #     print('--------------', file=f)
+    #     print('eps_p', eps_p, file=f)
+    #     print('sig_J', sig_J, file=f)
+    #     print('L1', L1, file=f)
+    #     print('L2', L2, file=f)
+    #     print('eps_p_b', eps_p_b, file=f)
+    #     print('sig_J_b', sig_J_b, file=f)
+    #     print('L1_b', L1_b, file=f)
+    #     print('L2_b', L2_b, file=f)
