@@ -6,5 +6,5 @@ _data/
 *.fits
 *series/
 *nc
-**/output/
+**/output*/
 **/ssw/
