@@ -8,3 +8,6 @@ _data/
 *nc
 **/output*/
 **/ssw/
+**/*run*/
+**/figures/
+*.txt
