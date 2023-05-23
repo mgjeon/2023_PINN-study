@@ -2,12 +2,13 @@
 **/__pycache__/
 _repo/
 _data/
-*.vtk
-*.fits
+**/*.vtk
+**/*.fits
 *series/
 *nc
 **/output*/
 **/ssw/
 **/*run*/
 **/figures/
-*.txt
+**/*.txt
+**/*.png
