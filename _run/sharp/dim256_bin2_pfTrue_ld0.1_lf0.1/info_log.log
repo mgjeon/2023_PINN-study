@@ -1,9 +1,0 @@
-Configuration:
-dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
-Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
-Configuration:
-dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
-Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
-Configuration:
-dim: 256, lambda_div: 0.100000, lambda_ff: 0.100000, decay_iterations: 50000, potential: True, vector_potential: False, 
-Using device: cuda (gpus 1) ['NVIDIA GeForce RTX 3060']
