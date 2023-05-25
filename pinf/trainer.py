@@ -184,15 +184,15 @@ class NF2Trainer:
             # forward step
             b = model(coords)
 
-            if iter == 0:
-                model.eval()
-                torch.save({'model': self.model,
-                    'cube_shape': self.cube_shape,
-                    'b_norm': self.b_norm,
-                    'spatial_norm': self.spatial_norm,
-                    'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % iter))
-                self.plot_sample(iter-1, batch_size=batch_size)
-                model.train()
+            # if iter == 0:
+            #     model.eval()
+            #     torch.save({'model': self.model,
+            #         'cube_shape': self.cube_shape,
+            #         'b_norm': self.b_norm,
+            #         'spatial_norm': self.spatial_norm,
+            #         'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % iter))
+            #     self.plot_sample(iter-1, batch_size=batch_size)
+            #     model.train()
 
             # compute boundary loss
             boundary_b = b[:n_boundary_coords]
@@ -208,6 +208,23 @@ class NF2Trainer:
             (b_diff * self.lambda_B +
              divergence_loss.mean() * lambda_div +
              force_loss.mean() * lambda_ff).backward()
+            
+            if iter == 0:
+                model.eval()
+                torch.save({'BC_loss': b_diff.detach().cpu().numpy(),
+                    'lambda_BC': self.lambda_B,
+                    'divergence_loss': divergence_loss.mean().detach().cpu().numpy(),
+                    'lambda_div': lambda_div,
+                    'force_loss': force_loss.mean().detach().cpu().numpy(),
+                    'lambda_ff': lambda_ff,}, os.path.join(self.base_path, 'loss_%06d.nf2' % iter))
+                torch.save({'model': self.model,
+                    'cube_shape': self.cube_shape,
+                    'b_norm': self.b_norm,
+                    'spatial_norm': self.spatial_norm,
+                    'meta_info': self.meta_info}, os.path.join(self.base_path, 'fields_%06d.nf2' % iter))
+                self.plot_sample(iter-1, batch_size=batch_size)
+                model.train()
+
             # update step
             torch.nn.utils.clip_grad_norm_(model.parameters(), 0.1)
             opt.step()
@@ -222,6 +239,8 @@ class NF2Trainer:
                 self.lambda_B *= self.lambda_B_decay
             if scheduler.get_last_lr()[0] > 5e-5:
                 scheduler.step()
+
+            
 
             # logging
             if (log_interval > 0 and (iter + 1) % log_interval == 0) or (iter == 0):
@@ -248,6 +267,12 @@ class NF2Trainer:
             # validation
             if (validation_interval > 0 and (iter + 1) % validation_interval == 0) or (iter == 0):
                 model.eval()
+                torch.save({'BC_loss': b_diff.detach().cpu().numpy(),
+                    'lambda_BC': self.lambda_B,
+                    'divergence_loss': divergence_loss.mean().detach().cpu().numpy(),
+                    'lambda_div': lambda_div,
+                    'force_loss': force_loss.mean().detach().cpu().numpy(),
+                    'lambda_ff': lambda_ff,}, os.path.join(self.base_path, 'loss_%06d.nf2' % (iter+1)))
                 torch.save({'model': self.model,
                     'cube_shape': self.cube_shape,
                     'b_norm': self.b_norm,

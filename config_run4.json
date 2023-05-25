@@ -10,7 +10,7 @@
     "simul":{
         "gpu_id": "0",
 
-        "base_path": "results/simul2/run",
+        "base_path": "results/simul4/run",
         "meta_path": null,
 
         "bin": 1,
@@ -25,24 +25,24 @@
         "use_potential_boundary": true,
         "potential_strides": 1,
         "use_vector_potential":  false,
-        "lambda_div": 1e-1,
-        "lambda_ff": 1e-1,
-        "decay_iterations": 25000,
+        "lambda_div": 1000,
+        "lambda_ff": 1000,
+        "decay_iterations": 10000,
         "device": null,
         "work_directory": null,
 
-        "total_iterations": 50000,
+        "total_iterations": 20000,
         "batch_size": 10000,
         "log_interval": 100,
         "validation_interval": 100,
         "num_workers": 4
     },
     "output":{
-        "vtk_path": "results/simul2/output/vtk",
-        "metric_path": "results/simul2/output/metric",
-        "plot_path": "results/simul2/output/plot"
+        "vtk_path": "results/simul4/output/vtk",
+        "metric_path": "results/simul4/output/metric",
+        "plot_path": "results/simul4/output/plot"
     },
     "eval":{
-        "img_path": "results/simul2/eval/img"
+        "img_path": "results/simul4/eval/img"
     }
 }

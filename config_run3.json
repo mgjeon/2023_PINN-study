@@ -10,7 +10,7 @@
     "simul":{
         "gpu_id": "0",
 
-        "base_path": "results/simul2/run",
+        "base_path": "results/simul3/run",
         "meta_path": null,
 
         "bin": 1,
@@ -38,11 +38,11 @@
         "num_workers": 4
     },
     "output":{
-        "vtk_path": "results/simul2/output/vtk",
-        "metric_path": "results/simul2/output/metric",
-        "plot_path": "results/simul2/output/plot"
+        "vtk_path": "results/simul3/output/vtk",
+        "metric_path": "results/simul3/output/metric",
+        "plot_path": "results/simul3/output/plot"
     },
     "eval":{
-        "img_path": "results/simul2/eval/img"
+        "img_path": "results/simul3/eval/img"
     }
 }
