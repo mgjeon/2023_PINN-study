@@ -59,9 +59,9 @@ def metric_df(B, b, B_potential, iteration):
 vtk_path = info['output']['vtk_path']
 metric_path = info['output']['metric_path']
 plot_path = info['output']['plot_path']
-os.makedirs(vtk_path, exist_ok=True)
-os.makedirs(metric_path, exist_ok=True)
-os.makedirs(plot_path, exist_ok=True)
+os.makedirs(vtk_path, exist_ok=False)
+os.makedirs(metric_path, exist_ok=False)
+os.makedirs(plot_path, exist_ok=False)
 
 n = info['exact']['n']
 m = info['exact']['m']

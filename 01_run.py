@@ -55,7 +55,7 @@ validation_interval = info['simul']['validation_interval']
 num_workers = info['simul']['num_workers']
 
 # init logging
-os.makedirs(base_path, exist_ok=True)
+os.makedirs(base_path, exist_ok=False)
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 for hdlr in log.handlers[:]:  # remove all old handlers
