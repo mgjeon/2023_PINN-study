@@ -27,7 +27,7 @@ bounds = info['exact']['bounds']
 
 b = get_analytic_b_field(n=n, m=m, l=l, psi=psi, resolution=resolution, bounds=bounds)
 
-base_path = info['simul']['base_path']
+base_path = os.path.join(info['simul']['base_path'], "run/")
 meta_path = info['simul']['meta_path']
 
 bin = info['simul']['bin']

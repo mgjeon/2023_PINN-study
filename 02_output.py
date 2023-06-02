@@ -56,12 +56,25 @@ def metric_df(B, b, B_potential, iteration):
     df = pd.DataFrame.from_dict([metric])
     return df
 
-vtk_path = info['output']['vtk_path']
-metric_path = info['output']['metric_path']
-plot_path = info['output']['plot_path']
-os.makedirs(vtk_path, exist_ok=False)
-os.makedirs(metric_path, exist_ok=False)
-os.makedirs(plot_path, exist_ok=False)
+import torch 
+
+def loss_df(file_path):
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    loss_path = file_path.replace('fields_', 'loss_')
+    state = torch.load(loss_path, map_location=device)
+    key = ["BC_loss", "lambda_BC", 'Div_loss', "lambda_div", "FF_loss", "lambda_ff"]
+    value = [state['BC_loss'].item(), state['lambda_BC'], state['divergence_loss'].item(), state['lambda_div'], state['force_loss'].item(), state['lambda_ff']]
+    df_loss = pd.DataFrame.from_dict([dict(zip(key, value))])
+    return df_loss
+
+base_path = info['simul']['base_path']
+vtk_path = os.path.join(base_path, info['output']['vtk_path'])
+metric_path = os.path.join(base_path, info['output']['metric_path'])
+plot_path = os.path.join(info['output']['plot_path'])
+
+os.makedirs(vtk_path, exist_ok=True)
+os.makedirs(metric_path, exist_ok=True)
+os.makedirs(plot_path, exist_ok=True)
 
 n = info['exact']['n']
 m = info['exact']['m']
@@ -85,18 +98,23 @@ df = pd.concat([df_b, df_pot], ignore_index=True)
 field_files = os.path.join(info['simul']['base_path'],'fields_*.nf2')
 field_files = sorted(glob.glob(field_files))
 
-metric_path = os.path.join(metric_path, 'metric.csv')
-if not os.path.exists(metric_path):
-    for file_path in field_files:
-        iters = os.path.basename(file_path).split('.')[0][7:]
-        title = 'PINN' + '_' + iters
-        B = load_cube(file_path)
-        
-        df_new = metric_df(B=B, b=b, B_potential=b_potential, iteration=int(iters))
-        df = pd.concat([df, df_new], ignore_index=True)
-        print('metric: ', file_path)
 
-    df.to_csv(metric_path, index=False)
+for file_path in field_files:
+    iters = os.path.basename(file_path).split('.')[0][7:]
+    title = 'PINN' + '_' + iters
+    B = load_cube(file_path)
+
+    df_new = metric_df(B=B, b=b, B_potential=b_potential, iteration=int(iters))
+    df_loss = loss_df(file_path)
+
+    df_new = pd.concat([df_new, df_loss], axis=1)
+    
+    df = pd.concat([df, df_new], ignore_index=True)
+    print('metric: ', file_path)
+    
+
+metric_file= os.path.join(metric_path, 'metric.csv')
+df.to_csv(metric_file, index=False)
 
 for file_path in field_files:
     iters = os.path.basename(file_path).split('.')[0][7:]
