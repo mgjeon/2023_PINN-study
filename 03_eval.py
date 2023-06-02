@@ -66,7 +66,7 @@ def create_metric_from_output(config_file):
     return info, iter, metrics
 
 def plot_metric(iter, metrics, img_path, which_log=None):
-    for label, metric in tqdm(metrics.items()):
+    for label, metric in tqdm(metrics.items(), desc='eval/img: '):
         fig, ax = plt.subplots(figsize=(8,6))
         if not (np.isnan(metric[0]) and np.isnan(metric[1])):
             ax.hlines(metric[0], xmin=iter[2], xmax=iter[-1], color='red', label='LL')

@@ -69,7 +69,8 @@ def pv_plot(B, vtk_path='./evaluation.vtk', points=((7, 64, 8), (7, 64, 8)), ove
             try: 
                 draw_streamlines((i, j, 0))
             except:
-                print(i, j)
+                pass
+                # print(i, j)
 
     p.camera_position = 'xy'
     p.show_bounds()

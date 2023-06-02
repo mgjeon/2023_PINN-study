@@ -5,6 +5,8 @@ import glob
 import pandas as pd
 import numpy as np
 
+from tqdm import tqdm
+
 from pinf.analytical_field import get_analytic_b_field
 from pinf.unpack import load_cube
 from pinf.potential_field import get_potential
@@ -70,11 +72,14 @@ def loss_df(file_path):
 base_path = info['simul']['base_path']
 vtk_path = os.path.join(base_path, info['output']['vtk_path'])
 metric_path = os.path.join(base_path, info['output']['metric_path'])
-plot_path = os.path.join(info['output']['plot_path'])
+plot_path = os.path.join(base_path, info['output']['plot_path'])
 
-os.makedirs(vtk_path, exist_ok=True)
-os.makedirs(metric_path, exist_ok=True)
-os.makedirs(plot_path, exist_ok=True)
+try:
+    os.makedirs(vtk_path, exist_ok=False)
+    os.makedirs(metric_path, exist_ok=False)
+    os.makedirs(plot_path, exist_ok=False)
+except:
+    print("There are already output files")
 
 n = info['exact']['n']
 m = info['exact']['m']
@@ -95,31 +100,31 @@ mag_plot('LL_pot', b_potential, vtk_path, plot_path)
 df_pot = metric_df(B=b_potential, b=b, B_potential=b_potential, iteration=-1)
 df = pd.concat([df_b, df_pot], ignore_index=True)
 
-field_files = os.path.join(info['simul']['base_path'],'fields_*.nf2')
+base_path = os.path.join(info['simul']['base_path'], "run/")
+field_files = os.path.join(base_path,'fields_*.nf2')
 field_files = sorted(glob.glob(field_files))
 
-
-for file_path in field_files:
-    iters = os.path.basename(file_path).split('.')[0][7:]
-    title = 'PINN' + '_' + iters
-    B = load_cube(file_path)
-
-    df_new = metric_df(B=B, b=b, B_potential=b_potential, iteration=int(iters))
-    df_loss = loss_df(file_path)
-
-    df_new = pd.concat([df_new, df_loss], axis=1)
-    
-    df = pd.concat([df, df_new], ignore_index=True)
-    print('metric: ', file_path)
-    
-
 metric_file= os.path.join(metric_path, 'metric.csv')
-df.to_csv(metric_file, index=False)
 
-for file_path in field_files:
+if not os.path.exists(metric_file):
+    for file_path in tqdm(field_files, desc='metric: '):
+        iters = os.path.basename(file_path).split('.')[0][7:]
+        title = 'PINN' + '_' + iters
+        B = load_cube(file_path)
+
+        df_new = metric_df(B=B, b=b, B_potential=b_potential, iteration=int(iters))
+        df_loss = loss_df(file_path)
+
+        df_new = pd.concat([df_new, df_loss], axis=1)
+        
+        df = pd.concat([df, df_new], ignore_index=True)
+        # print('metric: ', file_path)
+        
+    df.to_csv(metric_file, index=False)
+
+for file_path in tqdm(field_files, desc='plot, vtk: '):
     iters = os.path.basename(file_path).split('.')[0][7:]
     title = 'PINN' + '_' + iters
     B = load_cube(file_path)
-    
     mag_plot(title, B, vtk_path, plot_path)
-    print('plot: ', file_path)
+    # print('plot: ', file_path)
