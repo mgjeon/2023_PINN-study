@@ -1,0 +1,48 @@
+{
+    "exact":{
+        "n": 1,
+        "m": 1,
+        "l": 0.3,
+        "psi": "np.pi/2",
+        "resolution": 64,
+        "bounds": [-1, 1, -1, 1, 0, 2]
+    },
+    "simul":{
+        "gpu_id": "0",
+
+        "base_path": "results/simul_01",
+        "meta_path": null,
+
+        "bin": 1,
+        
+        "height": 64,
+        "spatial_norm": 32,
+        "b_norm": 100,
+
+        "meta_info": null,
+        "dim": 256,
+        "positional_encoding": false,
+        "use_potential_boundary": true,
+        "potential_strides": 1,
+        "use_vector_potential":  false,
+        "w_div": 1e-1,
+        "w_ff": 1e-1,
+        "decay_iterations": 25000,
+        "device": null,
+        "work_directory": null,
+
+        "total_iterations": 50000,
+        "batch_size": 10000,
+        "log_interval": 100,
+        "validation_interval": 100,
+        "num_workers": 4
+    },
+    "output":{
+        "vtk_path": "output/vtk",
+        "metric_path": "output/metric",
+        "plot_path": "output/plot"
+    },
+    "eval":{
+        "img_path": "eval/img"
+    }
+}
